@@ -4,6 +4,9 @@ import express from "express";
 //? import auth method here.
 
 const userRoute = express.Router();
-//? user routes here like /users.post /registration-users.post /users.put
+
+userRoute.post("/users");
+userRoute.post("/registration-users");
+userRoute.put("/users/:id");
 
 export default userRoute;

@@ -3,6 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import connectMongoDB from "./src/framework/config/db.js";
+import userRoute from "./src/components/users/routes.js";
 
 const app = express();
 dotenv.config();
@@ -12,9 +13,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.use("/", (req, res) => {
-    res.json("Welcome to home page.");
-});
+//*all users routes.
+app.use("/api/v1/auth", userRoute);
 
 const port = process.env.PORT || 5000;
 
