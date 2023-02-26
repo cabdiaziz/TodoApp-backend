@@ -1,2 +1,7 @@
 //? here will write a methods that do one query per method.
-//? This method is for users only.
+import User from "./index.js";
+
+export const createNewUser = async(user) => {
+    //* user parameters it come from express layer.
+    return await User.create(user);
+};

@@ -4,9 +4,9 @@ import express from "express";
 //? import auth method here.
 
 const userRoute = express.Router();
-
-userRoute.post("/users");
-userRoute.post("/registration-users");
-userRoute.put("/users/:id");
+//TODO:  /my-profile
+userRoute.post("/login");
+userRoute.post("/signup");
+userRoute.patch("/users/:id");
 
 export default userRoute;
