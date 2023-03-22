@@ -41,7 +41,7 @@ This is a backend of todoList app to install it locally do the following steps
 
 Clone the repository
 
--git
+- git
 
 ```sh
 git clone https://github.com/cabdiaziz/TodoApp-backend.git
