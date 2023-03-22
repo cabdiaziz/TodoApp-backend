@@ -39,7 +39,7 @@ This is a backend of todoList app to install it locally do the following steps
 
 ### Prerequisites
 
-Step 1: clone the repository
+Clone the repository
 
 -git
 
@@ -47,7 +47,9 @@ Step 1: clone the repository
 git clone https://github.com/cabdiaziz/TodoApp-backend.git
 ```
 
-Step 2: install the project
+### Installation
+
+Install the project
 
 - npm
 
