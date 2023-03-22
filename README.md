@@ -22,16 +22,14 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-This is a todoList backend
+This is a todoList app backend
 
 ### Built With
 
-This is the list of frameworks/libraries used in this project
+This is the list of technologies and frameworks/libraries used in this project
 
-- [![React][react.js]][react-url]
-- [![Node][node.js]][node-url]
+- NodeJs and ExpressJs
+- MongoDB and Mongoose
 
 <!-- GETTING STARTED -->
 
@@ -52,23 +50,30 @@ git clone https://github.com/cabdiaziz/TodoApp-backend.git
 Step 2: install the project
 
 - npm
+
   ```sh
   npm install
   ```
+
 - yarn
 
   ```sh
-  yarn install
+  yarn install / yarn
   ```
 
   Step 3: run
 
 - npm
+
   ```sh
   npm start
   ```
 
-<!-- CONTACT -->
+- yarn
+  ```sh
+  yarn run
+  ```
+  <!-- CONTACT -->
 
 ## Contact
 
@@ -76,4 +81,6 @@ Github profile - [@cabdiaziz](https://github.com/cabdiaziz)
 
 Project Link: [https://github.com/cabdiaziz/TodoApp-backend](https://github.com/cabdiaziz/TodoApp-backend)
 
-Footer : `sh My-App : 24-jan-2023 `
+Footer : ```sh
+ My-App : 24-jan-2023 
+ `
