@@ -83,6 +83,8 @@ Github profile - [@cabdiaziz](https://github.com/cabdiaziz)
 
 Project Link: [https://github.com/cabdiaziz/TodoApp-backend](https://github.com/cabdiaziz/TodoApp-backend)
 
-Footer : ```sh
- My-App : 24-jan-2023 
- `
+Footer :
+
+```sh
+My-App : 24-jan-2023
+```
