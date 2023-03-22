@@ -15,6 +15,7 @@
       </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#footer">Footer</a></li>
   </ol>
 </details>
 
@@ -83,7 +84,7 @@ Github profile - [@cabdiaziz](https://github.com/cabdiaziz)
 
 Project Link: [https://github.com/cabdiaziz/TodoApp-backend](https://github.com/cabdiaziz/TodoApp-backend)
 
-Footer :
+## Footer
 
 ```sh
 My-App : 24-jan-2023
