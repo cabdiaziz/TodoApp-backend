@@ -64,7 +64,7 @@ Install the project
   yarn install / yarn
   ```
 
-  Step 3: run
+### Run
 
 - npm
 
