@@ -1,23 +1,79 @@
-# My-App 24-jan-2023
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-# User Field Tasks.
+<!-- ABOUT THE PROJECT -->
 
-# paused this project for learning reasons.
+## About The Project
 
-[x] write a db connection
-[x] upload to github repository.
-[x] implement clean architecture
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-[x] write three routes for user api
-[x] design users model
+This is a todoList backend
 
-[] write the query layer methods.
-[] write three logic layer methods
-() Validation for req body.
-[] write three express methods
+### Built With
 
-[] connect to firebase and enable auth service.
-[] write auth middleware
+This is the list of frameworks/libraries used in this project
 
-LAST STAPES :
--Validation for models
+- [![React][react.js]][react-url]
+- [![Node][node.js]][node-url]
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+This is a backend of todoList app to install it locally do the following steps
+
+### Prerequisites
+
+Step 1: clone the repository
+
+-git
+
+```sh
+git clone https://github.com/cabdiaziz/TodoApp-backend.git
+```
+
+Step 2: install the project
+
+- npm
+  ```sh
+  npm install
+  ```
+- yarn
+
+  ```sh
+  yarn install
+  ```
+
+  Step 3: run
+
+- npm
+  ```sh
+  npm start
+  ```
+
+<!-- CONTACT -->
+
+## Contact
+
+Github profile - [@cabdiaziz](https://github.com/cabdiaziz)
+
+Project Link: [https://github.com/cabdiaziz/TodoApp-backend](https://github.com/cabdiaziz/TodoApp-backend)
+
+Footer : `sh My-App : 24-jan-2023 `
