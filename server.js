@@ -6,6 +6,7 @@ import connectMongoDB from "./src/framework/config/db.js";
 import { userRoute } from "./src/components/users/index.js";
 import { taskRoute } from "./src/components/tasks/index.js";
 import { ApiError } from "./src/framework/utils/apiError.js";
+import { globalError } from "./src/framework/middleware/errorMiddleware.js";
 
 const app = express();
 dotenv.config(); //env setup.
@@ -24,23 +25,10 @@ app.use("/api/v1/auth", userRoute);
 app.use("/api/v1", taskRoute);
 
 app.all("*", (req, res, next) => {
-  // const err = new Error(`can't find this route : ${req.originalUrl}`);
-  // next(err.message);
   next(new ApiError(`can't find this route : ${req.originalUrl}`, 400));
 });
 
-//default express error handler middleware.
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
-
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-    err: err,
-    stack: err.stack,
-  });
-});
+app.use(globalError);
 
 const port = process.env.PORT || 5000;
 
