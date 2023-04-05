@@ -1,4 +1,4 @@
-//? this file is express layer only calls functions and wait responses.
+//* this file is express layer only calls functions and wait responses.
 import {
   newTaskService,
   getAllTasksService,
@@ -6,8 +6,14 @@ import {
 } from "./index.js";
 import { createNewTask, findAllTasks, findAndUpdateTask } from "./index.js";
 import apiErrorHandler from "../../framework/middleware/apiErrorHandler.js";
+import asyncHandler from "express-async-handler";
 
-export const createTask = async (req, res) => {
+//? body data need a validation using express-validator
+
+// @desc  crate a new task.
+// @api   POST /api/v1/tasks.
+// @access private.
+export const createTask = asyncHandler(async (req, res) => {
   try {
     const { description } = req.body;
 
@@ -21,16 +27,32 @@ export const createTask = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
-export const getTasks = async (req, res) => {
+});
+
+// @desc  return all tasks.
+// @api   GET /api/v1/tasks.
+// @access private.
+export const getTasks = asyncHandler(async (req, res) => {
   try {
-    const allTasks = await getAllTasksService({ findAllTasks });
-    return res.status(200).json({ allTasks });
+    //pagination.
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 5;
+    const skip = (page - 1) * limit;
+    const pagination = { limit, skip }; //result : 5
+
+    const allTasks = await getAllTasksService({ pagination }, { findAllTasks });
+    return res
+      .status(200)
+      .json({ results: allTasks.length, page, data: allTasks });
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
-};
-export const taskCompletion = async (req, res) => {
+});
+
+// @desc  update task completion.
+// @api   PUT /api/v1/tasks.
+// @access private.
+export const taskCompletion = asyncHandler(async (req, res) => {
   try {
     const { _id } = req.params;
     const { isCompleted } = req.body;
@@ -46,7 +68,7 @@ export const taskCompletion = async (req, res) => {
     console.log("Err ==", err);
     res.status(500).json({ message: err.message });
   }
-};
+});
 
 export const getOneTask = async (req, res) => {};
 export const updateTask = async (req, res) => {};

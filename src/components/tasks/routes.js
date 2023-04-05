@@ -4,8 +4,8 @@ import { createTask, getTasks, taskCompletion } from "./index.js";
 
 const taskRoute = express.Router();
 
-taskRoute.post("/tasks", createTask);
-taskRoute.get("/tasks", getTasks);
-taskRoute.patch("/tasks/:_id", taskCompletion);
+taskRoute.route("/tasks").get(getTasks).post(createTask); //short way to get & post.
+
+taskRoute.put("/tasks/:_id", taskCompletion);
 
 export default taskRoute;

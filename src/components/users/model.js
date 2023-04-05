@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
   {
-    // uid: { type: String, required: true },
-    name: { type: String, required: true },
-    email: { type: String, required: true },
+    uid: { type: String, required: [true, "uid is required"] },
+    name: { type: String, required: [true, "name is required"] },
+    email: { type: String, required: [true, "email is required"] },
     role: {
       type: String,
       enum: ["admin", "user"],
       default: "user",
     },
-    status: { type: String, enum: ["active", "blocked"], default: "active" },
+    active: { type: Boolean, default: false },
   },
   {
     timestamps: true,

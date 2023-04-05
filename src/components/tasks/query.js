@@ -5,8 +5,12 @@ export const createNewTask = async (task) => {
 };
 
 //if you wanna to deselect field write _field-name in mongoose.
-export const findAllTasks = async () => {
-  return await Task.find({}).select("description isCompleted");
+export const findAllTasks = async ({ pagination }) => {
+  const { limit, skip } = pagination;
+  return await Task.find({})
+    .select("description isCompleted")
+    .limit(limit)
+    .skip(skip);
 };
 
 export const findOneTask = async (_id) => {
