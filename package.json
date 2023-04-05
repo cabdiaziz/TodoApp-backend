@@ -1,25 +1,26 @@
 {
-    "name": "my-app",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "env-cmd -f ./src/framework/config/config.env  nodemon server.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "env-cmd": "^10.1.0",
-        "express": "^4.18.2",
-        "mongoose": "^6.8.4"
-    },
-    "devDependencies": {
-        "dotenv": "^16.0.3",
-        "helmet": "^6.0.1",
-        "morgan": "^1.10.0",
-        "nodemon": "^2.0.20"
-    }
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "env-cmd -f ./src/framework/config/config.env  node server.js",
+    "start:dev": "env-cmd -f ./src/framework/config/config.env  nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "env-cmd": "^10.1.0",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "helmet": "^6.0.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  }
 }
