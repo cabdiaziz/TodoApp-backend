@@ -1,14 +1,15 @@
-export { createTask, getTasks, taskCompletion } from "./controller.js";
+export { createTask, getTasks, taskCompletion, getTask } from "./controller.js";
 export { default as taskRoute } from "./routes.js";
 export {
   newTaskService,
   getAllTasksService,
   taskCompletionService,
+  getTaskService,
 } from "./service.js";
 export {
   createNewTask,
   findAllTasks,
-  findOneTask,
+  findTask,
   findAndUpdateTask,
 } from "./query.js";
 export { default as Task } from "./model.js";

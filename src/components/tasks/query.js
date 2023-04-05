@@ -13,7 +13,8 @@ export const findAllTasks = async ({ pagination }) => {
     .skip(skip);
 };
 
-export const findOneTask = async (_id) => {
+export const findTask = async (_id) => {
+  console.log("findTask_id", _id);
   return await Task.findOne({ _id });
 };
 
