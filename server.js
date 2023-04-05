@@ -2,11 +2,12 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import connectMongoDB from "./src/framework/config/db.js";
-import { userRoute } from "./src/components/users/index.js";
-import { taskRoute } from "./src/components/tasks/index.js";
 import { ApiError } from "./src/framework/utils/apiError.js";
 import { globalError } from "./src/framework/middleware/errorMiddleware.js";
+
+import connectMongoDB from "./src/framework/config/db.js";
+import { usersRoute } from "./src/components/users/index.js";
+import { tasksRoute } from "./src/components/tasks/index.js";
 
 const app = express();
 dotenv.config(); //env setup.
@@ -21,13 +22,14 @@ app.use(express.json());
 app.use(helmet());
 
 //all Routes
-app.use("/api/v1/auth", userRoute);
-app.use("/api/v1", taskRoute);
+app.use("/api/v1/auth", usersRoute);
+app.use("/api/v1/tasks", tasksRoute);
 
 app.all("*", (req, res, next) => {
-  next(new ApiError(`can't find this route : ${req.originalUrl}`, 400));
+  next(new ApiError(`Can't find this route : ${req.originalUrl}`, 400));
 });
 
+//project error handler structure.
 app.use(globalError);
 
 const port = process.env.PORT || 5000;

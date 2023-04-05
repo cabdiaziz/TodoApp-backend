@@ -1,4 +1,4 @@
-//* this file is express layer only calls functions and wait responses.
+//* express layer
 import {
   newTaskService,
   getAllTasksService,
@@ -12,8 +12,6 @@ import {
   deleteTaskById,
 } from "./index.js";
 import asyncHandler from "express-async-handler";
-
-// import apiErrorHandler from "../../framework/utils/apiError.js";
 
 //? body data need a validation using express-validator
 

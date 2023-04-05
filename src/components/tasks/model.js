@@ -5,10 +5,10 @@ const taskSchema = mongoose.Schema(
   {
     description: { type: String, required: true },
     isCompleted: { type: Boolean, default: false },
-    // ref_user: {
-    //   type: mongoose.schema.type.objectId,
-    //   ref: "Users",
-    //   required: true,
+    // user: {
+    //   type: mongoose.schema.type.ObjectId,
+    //   ref: "users",
+    //   required: [true,"user reference  field is required"],
     // },
   },
   {
@@ -16,5 +16,5 @@ const taskSchema = mongoose.Schema(
   }
 );
 
-const Task = mongoose.model("task", taskSchema);
+const Task = mongoose.model("tasks", taskSchema);
 export default Task;

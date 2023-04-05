@@ -1,10 +1,11 @@
+//* Database layer
 import { Task } from "./index.js";
 
 export const createNewTask = async (task) => {
   return await Task.create(task);
 };
 
-//if you wanna to deselect field write _field-name in mongoose.
+//if you want to de-select fields (_field-name ,...name).
 export const findAllTasks = async ({ pagination }) => {
   const { limit, skip } = pagination;
   return await Task.find({})
@@ -14,9 +15,10 @@ export const findAllTasks = async ({ pagination }) => {
 };
 
 export const findTask = async (_id) => {
-  return await Task.findOne({ _id });
+  return await Task.findOne({ _id }).select("description isCompleted");
 };
 
+//only updates isCompleted field.
 export const findAndUpdateTask = async (task) => {
   const { _id } = task;
   const { isCompleted } = task;
@@ -28,5 +30,5 @@ export const findAndUpdateTask = async (task) => {
 };
 
 export const deleteTaskById = async (_id) => {
-  return await Task.findByIdAndDelete(_id); //find id and delete it.
+  return await Task.findByIdAndDelete(_id); //find id and delete.
 };
