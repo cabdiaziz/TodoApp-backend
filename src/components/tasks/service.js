@@ -1,9 +1,6 @@
-export const newTaskService = async (
-  { createNewTask, apiErrorHandler },
-  { description }
-) => {
+export const newTaskService = async ({ createNewTask }, { description }) => {
   try {
-    if (!description) return apiErrorHandler(400, "Empty data is not allowed");
+    // if (!description) return apiErrorHandler(400, "Empty data is not allowed");
     const newTask = await createNewTask({ description });
     return newTask;
   } catch (err) {
@@ -34,21 +31,15 @@ export const taskCompletionService = async (
   }
 };
 
-export const getTaskService = async (
-  { findTask, apiErrorHandler },
-  { _id }
-) => {
+export const getTaskService = async ({ findTask }, { _id }) => {
   const task = await findTask(_id);
   // what if task found..? -> return not-found.
-  if (!task) return apiErrorHandler(400, `Task not found`);
+  // if (!task) return apiErrorHandler(400, `Task not found`);
   return task;
 };
 
-export const deleteTaskService = async (
-  { deleteTaskById, apiErrorHandler },
-  { _id }
-) => {
+export const deleteTaskService = async ({ deleteTaskById }, { _id }) => {
   const task = await deleteTaskById(_id);
-  if (!task) return apiErrorHandler(400, `Task not deleted`);
+  // if (!task) return apiErrorHandler(400, `Task not deleted`);
   return task;
 };

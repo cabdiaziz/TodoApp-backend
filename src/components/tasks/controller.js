@@ -11,8 +11,9 @@ import {
   findTask,
   deleteTaskById,
 } from "./index.js";
-import apiErrorHandler from "../../framework/middleware/apiErrorHandler.js";
 import asyncHandler from "express-async-handler";
+
+// import apiErrorHandler from "../../framework/utils/apiError.js";
 
 //? body data need a validation using express-validator
 
@@ -23,10 +24,7 @@ export const createTask = asyncHandler(async (req, res) => {
   try {
     const { description } = req.body;
 
-    const newTask = await newTaskService(
-      { createNewTask, apiErrorHandler },
-      { description }
-    );
+    const newTask = await newTaskService({ createNewTask }, { description });
 
     if (newTask.code !== 400) return res.status(201).json(newTask); //if true
     return res.status(newTask.code).json({ message: newTask.message }); //if false
@@ -76,7 +74,7 @@ export const taskCompletion = asyncHandler(async (req, res) => {
 // @access private.
 export const getTask = asyncHandler(async (req, res) => {
   const { _id } = req.params;
-  const task = await getTaskService({ findTask, apiErrorHandler }, { _id });
+  const task = await getTaskService({ findTask }, { _id });
   if (task.code !== 400) return res.status(200).json({ task });
   return res.status(task.code).json({ message: task.message });
 });
@@ -86,10 +84,7 @@ export const getTask = asyncHandler(async (req, res) => {
 // @access private.
 export const deleteTask = async (req, res) => {
   const { _id } = req.params;
-  const task = await deleteTaskService(
-    { deleteTaskById, apiErrorHandler },
-    { _id }
-  );
+  const task = await deleteTaskService({ deleteTaskById }, { _id });
 };
 
 //? need some time to manage update section.
