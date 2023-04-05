@@ -12,6 +12,7 @@ import {
   deleteTaskById,
 } from "./index.js";
 import asyncHandler from "express-async-handler";
+import { ApiError } from "../../framework/utils/apiError.js";
 
 //? body data need a validation using express-validator
 
@@ -55,7 +56,7 @@ export const getTasks = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/tasks.
 // @access private.
 //* need some changes.
-export const taskCompletion = asyncHandler(async (req, res) => {
+export const taskCompletion = asyncHandler(async (req, res, next) => {
   const { _id } = req.params;
   const { isCompleted } = req.body;
   const task = { _id, isCompleted };
@@ -64,6 +65,8 @@ export const taskCompletion = asyncHandler(async (req, res) => {
     { findAndUpdateTask },
     { task }
   );
+  if (!completedTask)
+    return next(new ApiError(`No task for this id : ${_id}`, 404));
 
   return res.status(200).json(completedTask);
 });
@@ -71,20 +74,20 @@ export const taskCompletion = asyncHandler(async (req, res) => {
 // @desc  get one task.
 // @route  GET /api/v1/tasks/_id.
 // @access private.
-export const getTask = asyncHandler(async (req, res) => {
+export const getTask = asyncHandler(async (req, res, next) => {
   const { _id } = req.params;
   const task = await getTaskService({ findTask }, { _id });
-  if (!task) return res.status(200).json({ msg: `Task not found` });
+  if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
   return res.status(200).json({ task });
 });
 
 // @desc  delete one task.
 // @route   DELETE /api/v1/tasks/_id.
 // @access private.
-export const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res, next) => {
   const { _id } = req.params;
   const task = await deleteTaskService({ deleteTaskById }, { _id });
-  if (!task) return res.status(400).json({ msg: "Task not found to delete" });
+  if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
   res.status(204).json();
 };
 

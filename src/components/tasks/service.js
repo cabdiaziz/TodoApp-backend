@@ -1,41 +1,28 @@
 //* business logic layer
 export const newTaskService = async ({ createNewTask }, { description }) => {
-  try {
-    // if (!description) return apiErrorHandler(400, "Empty data is not allowed");
-    const newTask = await createNewTask({ description });
-    // what if description is empty..? need a body validation
-    return newTask;
-  } catch (err) {
-    return err.message;
-  }
+  const newTask = await createNewTask({ description });
+  // what if description is empty..? then we need body data validation
+  return newTask;
 };
 
 export const getAllTasksService = async ({ pagination }, { findAllTasks }) => {
-  try {
-    const allTasks = await findAllTasks({ pagination });
-    // what if no task found..?
-    return allTasks;
-  } catch (err) {
-    return err.message;
-  }
+  const allTasks = await findAllTasks({ pagination });
+  return allTasks;
 };
 
+//@desc need an update this function.
 export const taskCompletionService = async (
   { findAndUpdateTask },
   { task }
 ) => {
-  try {
-    const completedTask = await findAndUpdateTask(task);
-
-    return completedTask;
-  } catch (err) {
-    return err.message;
-  }
+  // what if task data is empty.
+  // isCompleted != empty -> setCompleted()/markTaskAsCompleted : else -> updateTask()
+  const completedTask = await findAndUpdateTask(task);
+  return completedTask;
 };
 
 export const getTaskService = async ({ findTask }, { _id }) => {
   const task = await findTask(_id);
-  // what if task found..? -> return not-found.
   return task;
 };
 
