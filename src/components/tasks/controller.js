@@ -1,12 +1,12 @@
 //* express layer
 import {
-  //service functions
+  //service imports
   newTaskService,
   getAllTasksService,
   updateTaskService,
   getTaskService,
   deleteTaskService,
-  //query functions
+  //query imports
   createNewTask,
   findAllTasks,
   findAndUpdateTask,
@@ -24,11 +24,10 @@ import { ApiError } from "../../framework/utils/apiError.js";
 export const createTask = asyncHandler(async (req, res) => {
   try {
     const { description } = req.body;
-
     const newTask = await newTaskService({ createNewTask }, { description });
 
-    if (newTask.code !== 400) return res.status(201).json(newTask); //if true
-    return res.status(newTask.code).json({ message: newTask.message }); //if false
+    if (newTask.code !== 400) return res.status(201).json(newTask);
+    return res.status(newTask.code).json({ message: newTask.message });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

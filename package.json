@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "env-cmd -f ./src/framework/config/config.env node server.js",
-    "dev": "env-cmd -f ./src/framework/config/config.env nodemon server.js"
+    "start:prod": "env-cmd -f ./src/framework/config/prod.env node server.js",
+    "start:dev": "env-cmd -f ./src/framework/config/dev.env nodemon server.js"
   },
   "keywords": [],
   "author": "",
