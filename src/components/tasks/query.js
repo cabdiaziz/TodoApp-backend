@@ -18,13 +18,11 @@ export const findTask = async (_id) => {
   return await Task.findOne({ _id }).select("description isCompleted");
 };
 
-//only updates isCompleted field.
-export const findAndUpdateTask = async (task) => {
-  const { _id } = task;
-  const { isCompleted } = task;
+//updated...
+export const findAndUpdateTask = async ({ _id, isCompleted, description }) => {
   return await Task.findByIdAndUpdate(
     _id,
-    { $set: { isCompleted } },
+    { $set: { isCompleted, description } },
     { new: true }
   ).select("description isCompleted");
 };

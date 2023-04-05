@@ -1,10 +1,12 @@
 //* express layer
 import {
+  //service imports
   newTaskService,
   getAllTasksService,
-  taskCompletionService,
+  updateTaskService,
   getTaskService,
   deleteTaskService,
+  //query imports
   createNewTask,
   findAllTasks,
   findAndUpdateTask,
@@ -12,6 +14,7 @@ import {
   deleteTaskById,
 } from "./index.js";
 import asyncHandler from "express-async-handler";
+import { ApiError } from "../../framework/utils/apiError.js";
 
 //? body data need a validation using express-validator
 
@@ -21,11 +24,10 @@ import asyncHandler from "express-async-handler";
 export const createTask = asyncHandler(async (req, res) => {
   try {
     const { description } = req.body;
-
     const newTask = await newTaskService({ createNewTask }, { description });
 
-    if (newTask.code !== 400) return res.status(201).json(newTask); //if true
-    return res.status(newTask.code).json({ message: newTask.message }); //if false
+    if (newTask.code !== 400) return res.status(201).json(newTask);
+    return res.status(newTask.code).json({ message: newTask.message });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -54,39 +56,33 @@ export const getTasks = asyncHandler(async (req, res) => {
 // @desc  update task completion.
 // @route   PUT /api/v1/tasks.
 // @access private.
-//* need some changes.
-export const taskCompletion = asyncHandler(async (req, res) => {
+//* onTest.
+export const updateTask = asyncHandler(async (req, res, next) => {
   const { _id } = req.params;
-  const { isCompleted } = req.body;
-  const task = { _id, isCompleted };
+  const { isCompleted, description } = req.body;
+  const data = { _id, isCompleted, description };
 
-  const completedTask = await taskCompletionService(
-    { findAndUpdateTask },
-    { task }
-  );
-
-  return res.status(200).json(completedTask);
+  const task = await updateTaskService({ findAndUpdateTask }, { data });
+  if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
+  return res.status(200).json(task);
 });
 
 // @desc  get one task.
 // @route  GET /api/v1/tasks/_id.
 // @access private.
-export const getTask = asyncHandler(async (req, res) => {
+export const getTask = asyncHandler(async (req, res, next) => {
   const { _id } = req.params;
   const task = await getTaskService({ findTask }, { _id });
-  if (!task) return res.status(200).json({ msg: `Task not found` });
+  if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
   return res.status(200).json({ task });
 });
 
 // @desc  delete one task.
 // @route   DELETE /api/v1/tasks/_id.
 // @access private.
-export const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res, next) => {
   const { _id } = req.params;
   const task = await deleteTaskService({ deleteTaskById }, { _id });
-  if (!task) return res.status(400).json({ msg: "Task not found to delete" });
+  if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
   res.status(204).json();
 };
-
-//? need some time to manage update section.
-export const updateTask = async (req, res) => {};
