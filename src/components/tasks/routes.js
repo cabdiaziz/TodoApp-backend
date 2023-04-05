@@ -8,14 +8,11 @@ import {
   deleteTask,
 } from "./index.js";
 
-const taskRoute = express.Router();
+const tasksRoute = express.Router();
 
 //short way to handle all routes in one line..
-taskRoute.route("/tasks").get(getTasks).post(createTask);
-taskRoute
-  .route("/tasks/:_id")
-  .get(getTask)
-  .put(taskCompletion)
-  .delete(deleteTask); //get task, update task status, delete task.
+tasksRoute.route("/").get(getTasks).post(createTask);
+//get task, update task-status, delete task.
+tasksRoute.route("/:_id").get(getTask).put(taskCompletion).delete(deleteTask);
 
-export default taskRoute;
+export default tasksRoute;

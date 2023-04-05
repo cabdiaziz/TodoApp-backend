@@ -3,10 +3,10 @@ import express from "express";
 //? import user methods from index
 //? import auth method here.
 
-const userRoute = express.Router();
-//TODO:  /my-profile
-userRoute.post("/login");
-userRoute.post("/signup");
-userRoute.patch("/users/:id");
+const usersRoute = express.Router();
 
-export default userRoute;
+usersRoute.post("/login");
+usersRoute.post("/signup");
+usersRoute.put("/users/:id");
+
+export default usersRoute;
