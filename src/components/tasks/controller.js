@@ -15,7 +15,7 @@ import asyncHandler from "express-async-handler";
 //? body data need a validation using express-validator
 
 // @desc  crate a new task.
-// @api   POST /api/v1/tasks.
+// @route   POST /api/v1/tasks.
 // @access private.
 export const createTask = asyncHandler(async (req, res) => {
   try {
@@ -34,7 +34,7 @@ export const createTask = asyncHandler(async (req, res) => {
 });
 
 // @desc  return all tasks.
-// @api   GET /api/v1/tasks.
+// @route   GET /api/v1/tasks.
 // @access private.
 export const getTasks = asyncHandler(async (req, res) => {
   try {
@@ -54,7 +54,7 @@ export const getTasks = asyncHandler(async (req, res) => {
 });
 
 // @desc  update task completion.
-// @api   PUT /api/v1/tasks.
+// @route   PUT /api/v1/tasks.
 // @access private.
 export const taskCompletion = asyncHandler(async (req, res) => {
   const { _id } = req.params;
@@ -69,11 +69,20 @@ export const taskCompletion = asyncHandler(async (req, res) => {
   return res.status(200).json(completedTask);
 });
 
+// @desc  get one task.
+// @route  GET /api/v1/tasks/_id.
+// @access private.
 export const getTask = asyncHandler(async (req, res) => {
   const { _id } = req.params;
   const task = await getTaskService({ findTask, apiErrorHandler }, { _id });
   if (task.code !== 400) return res.status(200).json({ task });
   return res.status(task.code).json({ message: task.message });
 });
-export const updateTask = async (req, res) => {};
+
+// @desc  delete one task.
+// @route   DELETE /api/v1/tasks/_id.
+// @access private.
 export const deleteTask = async (req, res) => {};
+
+//? need some time to manage update section.
+export const updateTask = async (req, res) => {};
