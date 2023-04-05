@@ -56,6 +56,7 @@ export const getTasks = asyncHandler(async (req, res) => {
 // @desc  update task completion.
 // @route   PUT /api/v1/tasks.
 // @access private.
+//* need some changes.
 export const taskCompletion = asyncHandler(async (req, res) => {
   const { _id } = req.params;
   const { isCompleted } = req.body;
@@ -75,8 +76,8 @@ export const taskCompletion = asyncHandler(async (req, res) => {
 export const getTask = asyncHandler(async (req, res) => {
   const { _id } = req.params;
   const task = await getTaskService({ findTask }, { _id });
-  if (task.code !== 400) return res.status(200).json({ task });
-  return res.status(task.code).json({ message: task.message });
+  if (!task) return res.status(200).json({ msg: `Task not found` });
+  return res.status(200).json({ task });
 });
 
 // @desc  delete one task.
@@ -85,6 +86,8 @@ export const getTask = asyncHandler(async (req, res) => {
 export const deleteTask = async (req, res) => {
   const { _id } = req.params;
   const task = await deleteTaskService({ deleteTaskById }, { _id });
+  if (!task) return res.status(400).json({ msg: "Task not found to delete" });
+  res.status(204).json();
 };
 
 //? need some time to manage update section.
