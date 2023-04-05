@@ -1,10 +1,12 @@
 //* express layer
 import {
+  //service functions
   newTaskService,
   getAllTasksService,
-  taskCompletionService,
+  updateTaskService,
   getTaskService,
   deleteTaskService,
+  //query functions
   createNewTask,
   findAllTasks,
   findAndUpdateTask,
@@ -55,20 +57,15 @@ export const getTasks = asyncHandler(async (req, res) => {
 // @desc  update task completion.
 // @route   PUT /api/v1/tasks.
 // @access private.
-//* need some changes.
-export const taskCompletion = asyncHandler(async (req, res, next) => {
+//* onTest.
+export const updateTask = asyncHandler(async (req, res, next) => {
   const { _id } = req.params;
-  const { isCompleted } = req.body;
-  const task = { _id, isCompleted };
+  const { isCompleted, description } = req.body;
+  const data = { _id, isCompleted, description };
 
-  const completedTask = await taskCompletionService(
-    { findAndUpdateTask },
-    { task }
-  );
-  if (!completedTask)
-    return next(new ApiError(`No task for this id : ${_id}`, 404));
-
-  return res.status(200).json(completedTask);
+  const task = await updateTaskService({ findAndUpdateTask }, { data });
+  if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
+  return res.status(200).json(task);
 });
 
 // @desc  get one task.
@@ -90,6 +87,3 @@ export const deleteTask = async (req, res, next) => {
   if (!task) return next(new ApiError(`No task for this id : ${_id}`, 404));
   res.status(204).json();
 };
-
-//? need some time to manage update section.
-export const updateTask = async (req, res) => {};
