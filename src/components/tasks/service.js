@@ -40,7 +40,15 @@ export const getTaskService = async (
 ) => {
   const task = await findTask(_id);
   // what if task found..? -> return not-found.
-  console.log("task", task);
   if (!task) return apiErrorHandler(400, `Task not found`);
+  return task;
+};
+
+export const deleteTaskService = async (
+  { deleteTaskById, apiErrorHandler },
+  { _id }
+) => {
+  const task = await deleteTaskById(_id);
+  if (!task) return apiErrorHandler(400, `Task not deleted`);
   return task;
 };

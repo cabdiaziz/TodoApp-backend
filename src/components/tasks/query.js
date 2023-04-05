@@ -14,7 +14,6 @@ export const findAllTasks = async ({ pagination }) => {
 };
 
 export const findTask = async (_id) => {
-  console.log("findTask_id", _id);
   return await Task.findOne({ _id });
 };
 
@@ -26,4 +25,8 @@ export const findAndUpdateTask = async (task) => {
     { $set: { isCompleted } },
     { new: true }
   ).select("description isCompleted");
+};
+
+export const deleteTaskById = async (_id) => {
+  return await Task.findByIdAndDelete(_id); //find id and delete it.
 };

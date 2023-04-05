@@ -4,10 +4,12 @@ import {
   getAllTasksService,
   taskCompletionService,
   getTaskService,
+  deleteTaskService,
   createNewTask,
   findAllTasks,
   findAndUpdateTask,
   findTask,
+  deleteTaskById,
 } from "./index.js";
 import apiErrorHandler from "../../framework/middleware/apiErrorHandler.js";
 import asyncHandler from "express-async-handler";
@@ -82,7 +84,13 @@ export const getTask = asyncHandler(async (req, res) => {
 // @desc  delete one task.
 // @route   DELETE /api/v1/tasks/_id.
 // @access private.
-export const deleteTask = async (req, res) => {};
+export const deleteTask = async (req, res) => {
+  const { _id } = req.params;
+  const task = await deleteTaskService(
+    { deleteTaskById, apiErrorHandler },
+    { _id }
+  );
+};
 
 //? need some time to manage update section.
 export const updateTask = async (req, res) => {};

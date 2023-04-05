@@ -1,10 +1,21 @@
 //Task routes
 import express from "express";
-import { createTask, getTasks, taskCompletion, getTask } from "./index.js";
+import {
+  createTask,
+  getTasks,
+  taskCompletion,
+  getTask,
+  deleteTask,
+} from "./index.js";
 
 const taskRoute = express.Router();
 
-taskRoute.route("/tasks").get(getTasks).post(createTask); //short way to get & post.
-taskRoute.route("/tasks/:_id").get(getTask).put(taskCompletion); //get one task, update task status.
+//short way to handle all routes in one line..
+taskRoute.route("/tasks").get(getTasks).post(createTask);
+taskRoute
+  .route("/tasks/:_id")
+  .get(getTask)
+  .put(taskCompletion)
+  .delete(deleteTask); //get task, update task status, delete task.
 
 export default taskRoute;
