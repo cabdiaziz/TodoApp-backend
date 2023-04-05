@@ -14,6 +14,7 @@ export const newTaskService = async (
 export const getAllTasksService = async ({ pagination }, { findAllTasks }) => {
   try {
     const allTasks = await findAllTasks({ pagination });
+    // what if no task found..?
     return allTasks;
   } catch (err) {
     return err.message;
@@ -31,4 +32,23 @@ export const taskCompletionService = async (
   } catch (err) {
     return err.message;
   }
+};
+
+export const getTaskService = async (
+  { findTask, apiErrorHandler },
+  { _id }
+) => {
+  const task = await findTask(_id);
+  // what if task found..? -> return not-found.
+  if (!task) return apiErrorHandler(400, `Task not found`);
+  return task;
+};
+
+export const deleteTaskService = async (
+  { deleteTaskById, apiErrorHandler },
+  { _id }
+) => {
+  const task = await deleteTaskById(_id);
+  if (!task) return apiErrorHandler(400, `Task not deleted`);
+  return task;
 };
