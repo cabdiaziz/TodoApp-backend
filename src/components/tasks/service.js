@@ -11,9 +11,9 @@ export const newTaskService = async (
   }
 };
 
-export const getAllTasksService = async ({ findAllTasks }) => {
+export const getAllTasksService = async ({ pagination }, { findAllTasks }) => {
   try {
-    const allTasks = await findAllTasks();
+    const allTasks = await findAllTasks({ pagination });
     return allTasks;
   } catch (err) {
     return err.message;

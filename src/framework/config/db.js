@@ -1,12 +1,13 @@
-//? db configurations here. my-app -collection:users in mongodb
+//? db configurations here. my-app -collection:users,tasks in mongodb
 import mongoose from "mongoose";
+import asyncHandler from "express-async-handler";
 
-const connectMongoDB = async() => {
-    mongoose.set("strictQuery", false);
-    const connection = await mongoose.connect(process.env.MONGO_URL);
-    return connection ?
-        console.log("Connect to MongoDB") :
-        console.log("No connection ?!!! ", connection);
-};
+const connectMongoDB = asyncHandler(async () => {
+  mongoose.set("strictQuery", false); // mongoose 7 will set false as default.
+
+  const connection = await mongoose.connect(process.env.MONGO_URL);
+  console.log("Connect to MongoDB");
+  return connection;
+}); //asyncHandler syntax = (function,middleware);
 
 export default connectMongoDB;

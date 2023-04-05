@@ -24,8 +24,17 @@ export const createTask = async (req, res) => {
 };
 export const getTasks = async (req, res) => {
   try {
-    const allTasks = await getAllTasksService({ findAllTasks });
-    return res.status(200).json({ allTasks });
+    //pagination.
+    console.log("req.params :-> ", req.params);
+    const page = 1;
+    const limit = 5;
+    const skip = (page - 1) * limit;
+    const pagination = { limit, skip }; //result : 5
+
+    const allTasks = await getAllTasksService({ pagination }, { findAllTasks });
+    return res
+      .status(200)
+      .json({ results: allTasks.length, page, data: allTasks });
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
