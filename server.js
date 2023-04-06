@@ -34,6 +34,15 @@ app.use(globalError);
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("This app is running on http://localhost:5000");
+});
+
+//handle rejection outside of express.
+process.on("unhandledRejection", (err) => {
+  console.log(`UnhandledRejection Error : ${err.name} | ${err.message}`);
+  server.close(() => {
+    console.log("Shutting down...");
+    process.exit(1); // Shutdown server.
+  });
 });
