@@ -13,10 +13,9 @@ import {
   findTask,
   deleteTaskById,
 } from "./index.js";
+
 import asyncHandler from "express-async-handler";
 import { ApiError } from "../../framework/utils/apiError.js";
-
-//? body data need a validation using express-validator
 
 // @desc  crate a new task.
 // @route   POST /api/v1/tasks.

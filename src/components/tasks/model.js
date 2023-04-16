@@ -1,4 +1,3 @@
-//? this schema need a validation
 import mongoose from "mongoose";
 
 const taskSchema = mongoose.Schema(
@@ -8,7 +7,7 @@ const taskSchema = mongoose.Schema(
     // user: {
     //   type: mongoose.schema.type.ObjectId,
     //   ref: "users",
-    //   required: [true,"user reference  field is required"],
+    //   required: [true,"user reference field is required"],
     // },
   },
   {

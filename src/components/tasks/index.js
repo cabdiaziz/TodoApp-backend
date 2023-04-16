@@ -5,6 +5,13 @@ export {
   getTask,
   deleteTask,
 } from "./controller.js";
+export {
+  createNewTaskValidator,
+  getTasksValidator,
+  getTaskValidator,
+  updateTaskValidator,
+  deleteTaskValidator,
+} from "./validations.js";
 export { default as tasksRoute } from "./routes.js";
 export {
   newTaskService,
